@@ -1,0 +1,118 @@
+  .codeToast {
+    .toast-wrapper {
+      width: 150px;
+      border-radius: 0px;
+    }
+    .toast-message {
+      text-align: center;
+      width: 50%;
+      height: 40px;
+      line-height: 6px;
+      opacity: 0.8;
+    }
+  }
+
+  page-mine {
+    .text-center {
+      text-align: center;
+    }
+    .mine-header {
+      .mine-bg {
+        position: absolute;
+        top:0px;
+        z-index: -1;
+        left: 0px;
+        width: 100%;
+        height: 200px;        
+      }
+      background-size: 100% 100%;
+      .toolbar-background {
+        background: transparent;
+      }
+      height: 200px;
+      .avatar {
+        width: 85px;
+      }
+    }
+    .scroll-content {
+      height: calc(100% - 250px);
+    }
+    .myinfo {
+      .fixed-content {
+        display: none !important;
+      }
+      .scroll-content {
+        margin-top: 50px !important;
+      }
+      top: 145px;
+      .category {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .num {
+        color: #2f90f3;
+        font-size: 20px;
+      }
+      .border {
+        border-right: solid 1px grey;
+      }
+      ion-item {
+        height: 50px;
+        ion-thumbnail {
+          min-height: 50px;
+          margin: 0px !important;
+        }
+        .item-inner {
+          border: none !important;
+        }
+        img {
+          width: 25px !important;
+          padding-top: 15px;
+        }
+      }
+      .personal-info, .bought-info, .share-info {
+        margin-top: 20px;
+      }
+      .sold-info, .bought-info, .share-info {
+        border-bottom: solid 1px #e3e3e3;
+      }
+    }
+    .toolbar-title {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+    }
+
+    .toolbar-background {
+      background-color: white;
+      border: none;
+      -webkit-box-shadow: 0, 0, 0;
+      -moz-box-shadow: 	  0, 0, 0;
+      border-shadow: 0px 0px 0px #000000 !important;
+    }
+
+    .header-md::after {
+      background-image: none;
+    }
+
+    ion-content {
+      background-color: #eeeeee !important;
+    }
+
+    input.text-input {
+      margin-left: 10px;
+    }
+
+    .item-md, .item-ios {
+      font-size: 1.4rem;
+      padding-left: 0px;
+      border-bottom: none;
+    }
+  }
+

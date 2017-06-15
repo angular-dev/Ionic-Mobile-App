@@ -1,0 +1,129 @@
+<ion-header no-border #header>
+
+  <ion-navbar id = "navbar" #navbar [style.backgroundColor]="getHeaderBgColor()">
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding scrollbar-y-auto class="no-margin-top">
+  <!-- top image slide -->
+  <div>
+    <p class="label-over-image"><span>{{'车源号 ' + carInfo.uniqueId}}</span></p>
+    <ion-slides id="carImageSlider" #carImageSlider loop="true" autoplay="3000" pager=true paginationType='fraction' autoplayDisableOnInteraction=false spaceBetween=0 (ionSlideDidChange)="onCarSlideChanged()">
+    <!--<ion-slides #carImageSlider spaceBetween=0 pager=true loop=true paginationType='fraction'>-->
+      <ion-slide style="margin:0;" *ngFor="let imageInfo of carInfo.carImages">
+        <img src="{{imageInfo.imagePath}}" />
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div style="margin:10px 10px 0px 10px;">
+    <h6>{{carInfo.brand.chName + ' ' + carSeries.chName + ' ' + carInfo.gearshift}}</h6>
+    <h6><span class="green-bold-text">{{carInfo.price + '万'}}</span>(不含过户费)</h6>
+    <ion-row align-items-center no-border no-padding style="background-color: #eeeeee;">
+      <ion-col col-1><img ion-image height="20" class="center-image" src="assets/images/icons/icon-coin.png"/></ion-col>
+      <ion-col col-8 style="padding: 0px;"><p style="margin-top: 0px; margin-bottom: 0px; text-align: left;">首府2.1万 月供1844元</p></ion-col>
+      <ion-col><ion-buttons end><button ion-button end clear color="secondary">申请</button></ion-buttons></ion-col>
+
+    </ion-row>
+
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="secondary" (click)="addFavorite()">加入收藏</button>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <div class="vertical-grey-divider"></div>
+          <button ion-button clear small col-sm color="secondary" (click)="onNotification()">降价通知</button>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="secondary" (click)="onCallService()">预约看车</button>
+          <div class="vertical-grey-divider"></div>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="secondary" (click)="onCallService()">咨询电话></button>
+          <div class="vertical-grey-divider"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+  
+  <div>
+  	<ion-grid style="margin: 15px;" no-padding>
+  	  <ion-row>
+  	  	<ion-col><span class="green-bold-text">{{carInfo.totalDriven + '万公里'}}</span></ion-col>
+  	  	<ion-col col-4><span class="green-bold-text">3年7个月</span></ion-col>
+  	  	<ion-col col-4><span class="green-bold-text">{{carInfo.city.chName}}</span></ion-col>
+  	  </ion-row>
+  	  <ion-row>
+  	  	<ion-col col-4><span class="black-medium-text">行驶里程</span></ion-col>
+  	  	<ion-col col-4><span class="black-medium-text">{{carInfo.purchaseDate.year + '/' + carInfo.purchaseDate.month}}上牌</span></ion-col>
+  	  	<ion-col col-4><span class="black-medium-text">车牌所在地</span></ion-col>
+  	  </ion-row>
+  	  <ion-row>
+  	  	<ion-col col-4><span class="green-bold-text">{{carInfo.emissionLevel.emissionLevel}}</span></ion-col>
+  	  	<ion-col col-4><span class="green-bold-text">{{carInfo.gearshift}}</span></ion-col>
+  	  	<ion-col col-4><span class="green-bold-text">{{carInfo.emissionAmount + 'L'}}</span></ion-col>
+  	  </ion-row>
+  	  <ion-row>
+  	  	<ion-col col-4><span class="black-medium-text">排放标准</span></ion-col>
+  	  	<ion-col col-4><span class="black-medium-text">变速箱</span></ion-col>
+  	  	<ion-col col-4><span class="black-medium-text">排量</span></ion-col>
+  	  </ion-row>
+  	</ion-grid>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+
+  <div>
+  	<ion-grid no-padding no-border style="font-size: 1.1rem;">
+  		<ion-row align-items-center *ngIf="convertedTestResult.length !== 0">
+  		  <ion-col col-8 class="report-grid-first-col"><span style="font-size: 1.6rem; font-weight: bold;"><h5>检测报告</h5></span></ion-col>
+  		</ion-row>
+  		<ion-row align-items-center class="car-list-item first-car-list-item" *ngFor="let detail of convertedTestResult">
+  		  <ion-col col-8 class="report-grid-first-col"><p>{{detail.testCategory}}</p></ion-col>
+  		  <ion-col col-1>{{(detail.uncheckedItems === 0) ? '' : detail.uncheckedItems + '项'}}</ion-col>
+  		  <ion-col col-1><img *ngIf="detail.uncheckedItems !== 0" ion-img height="12" class="center-image" src="assets/images/icons/icon-attention.png"/></ion-col>
+  		  <ion-col col-1>{{(detail.checkedItems === 0) ? '' : detail.checkedItems + '项'}}</ion-col>
+  		  <ion-col col-1><img *ngIf="detail.checkedItems !== 0" ion-img height="12" class="center-image r-padding-15" src="assets/images/icons/icon-check.png"></ion-col>
+  		</ion-row>
+  	</ion-grid>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+
+  <div>
+  	<ion-grid no-border style="font-size: 1.2rem;">
+  		<ion-row align-items-start>
+  		  <ion-col col-3><img ion-img src="assets/images/avatar.png"/></ion-col>
+  		  <ion-col col-9>
+  		  	<p>卖家说车 {{carInfo.sellerName}}先生</p>
+  		  	<p>{{carInfo.sellerDescription}}</p>
+  		  </ion-col>
+  		</ion-row>
+  	</ion-grid>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+
+  <div>
+		<ion-card *ngFor="let imageInfo of carInfo.carImages; let i = index" (click)="presentImageGallery(i)">
+			<img src="{{imageInfo.imagePath}}" />
+		</ion-card>
+  </div>  
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar no-padding no-margin color="primery" position="bottom" style="border-top: 1px solid #eeeeee; padding: 0px;">
+    <ion-row no-boder no-padding align-items-center style="text-align: center;">
+      <ion-col col-2 style="font-size: 1.2rem; border-right: 1px solid #eeeeee; height: 100%;" (click)="addFavorite()">收藏</ion-col>
+      <ion-col col-3 style="font-size: 1.2rem; border-right: 1px solid #eeeeee" (click)="onNotification()">降价通知</ion-col>
+      <ion-col col-3 style="font-size: 1.2rem; border-right: 1px solid #eeeeee" (click)="onCallService()">致电客服</ion-col>
+      <ion-col col-4 style="font-size: 1.2rem; border-right: 1px solid #eeeeee; background-color: #007fd8; color: white;" (click)="onCallService()">预约看车</ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+

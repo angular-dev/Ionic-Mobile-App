@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>订阅车源</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content scrollbar-y-auto>
+  	<ion-list no-lines>
+		  <ion-item *ngFor="let carInfo of carInfos" text-wrap class="car-list-item" (click)="openCarDetailsPage($event, carInfo)">
+		    <ion-thumbnail item-left>
+		      <img src="{{carInfo.carThumbUrl}}">
+		    </ion-thumbnail>
+		    <h2>{{carInfo.carName}}</h2>
+		    <p><span class="car-price-main-span">{{carInfo.carPriceWithoutTax}}</span><span class="car-price-span">{{carInfo.carPriceWithTax}}</span></p>
+		    <p class="car-desc-span">{{carInfo.carPosition}}／{{carInfo.carProductDate}}/{{carInfo.carTotalTraveling}}／{{carInfo.carGearshiftType}}</p>
+		  </ion-item>
+		</ion-list>	
+</ion-content>

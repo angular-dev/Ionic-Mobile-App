@@ -1,0 +1,217 @@
+<ion-header no-border #header>
+
+  <ion-navbar id = "navbar" #navbar text-center>
+    <ion-title>
+	  高级筛选
+    </ion-title>
+
+    <ion-buttons end>
+      <button (click)="initFilterKey()" ion-button color="black">
+        重置
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content no-padding scrollbar-y-auto>
+  <ion-item>
+    车型
+    <ion-grid text-center *ngIf="carTypeData">
+      <ion-row>
+        <ion-col col-4 *ngFor="let carType of carTypeData.type">
+          <button ion-button outline [color]="(selectedCarType === carType.chName) ? 'secondary' : 'black'" (click)="onSelectCarType(carType.chName)">
+            {{carType.chName}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <button ion-item detail-none style="font-size: 1em; border-bottom: 1px solid lightgray;" (click)="onSelectCity()">
+  	城市  
+    <span class="selectedBrand">{{selectedCity}}</span>
+    <ion-icon name="arrow-forward" item-right color="lightGray"></ion-icon>  
+  </button>
+  <button ion-item detail-none style="font-size: 1em; border-bottom: 1px solid lightgray;" (click)="onSelectBrand()">
+    品牌
+    <span class="selectedBrand">{{(selectedSeries === '不限' || selectedSeries === '' ) ? selectedBrand : selectedSeries}}</span>
+    <ion-icon name="arrow-forward" item-right></ion-icon>  
+  </button>
+  <ion-item class="range-container">
+    <ion-row>
+      <ion-col col-8 text-left>车龄(单位:年)</ion-col>
+      <ion-col col-4 text-right>{{yearsScopeDescription}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item style="border: none">
+        <ion-range step="1" dualKnobs="true" pin="true" [(ngModel)]="yearsScopeStruction" min=0 max=6 color="secondary" (ionChange)="updateYearsScopeDesc($event)"></ion-range>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center><span>0</span></ion-col>
+      <ion-col text-center><span>1</span></ion-col>
+      <ion-col text-center><span>2</span></ion-col>
+      <ion-col text-center><span>3</span></ion-col>
+      <ion-col text-center><span>4</span></ion-col>
+      <ion-col text-center><span>5</span></ion-col>
+      <ion-col text-center><span>不限</span></ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item class="range-container">
+    <ion-row>
+      <ion-col col-8 text-left>价格(单位:万元)</ion-col>
+      <ion-col col-4 text-right>{{priceScopeDescription}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item style="border: none">
+        <ion-range step="1" dualKnobs="true" pin="true" [(ngModel)]="priceScopeStruction" min=0 max=60 color="secondary" (ionChange)="updatePriceScopeDesc($event)"></ion-range>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center><span>0</span></ion-col>
+      <ion-col text-center><span>10</span></ion-col>
+      <ion-col text-center><span>20</span></ion-col>
+      <ion-col text-center><span>30</span></ion-col>
+      <ion-col text-center><span>40</span></ion-col>
+      <ion-col text-center><span>50</span></ion-col>
+      <ion-col text-center><span>不限</span></ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item class="range-container">
+    <ion-row>
+      <ion-col col-8 text-left>行驶里程(单位:万公里)</ion-col>
+      <ion-col col-4 text-right style="font-size: .8em;">{{drivenScopeDescription}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item style="border: none">
+        <ion-range step="1" dualKnobs="true" pin="true" [(ngModel)]="drivenScopeStruction" min=0 max=15 color="secondary" (ionChange)="updateDrivenScopeDesc($event)"></ion-range>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center><span>0</span></ion-col>
+      <ion-col text-center><span>3</span></ion-col>
+      <ion-col text-center><span>6</span></ion-col>
+      <ion-col text-center><span>9</span></ion-col>
+      <ion-col text-center><span>12</span></ion-col>
+      <ion-col text-center><span>不限</span></ion-col>
+    </ion-row>  </ion-item>
+  <ion-item class="range-container">
+    排量
+    <ion-row>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '不限') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('不限')">不限</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '1.0L一下') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('1.0L一下')">1.0L一下</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '1.1-1.6L') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('1.1-1.6L')">1.1-1.6L</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '1.7-2.0L') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('1.7-2.0L')">1.7-2.0L</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '2.1-2.5L') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('2.1-2.5L')">2.1-2.5L</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '2.6-3.0L') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('2.6-3.0L')">2.6-3.0L</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '3.1-4.0L') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('3.1-4.0L')">3.1-4.0L</button>
+      </ion-col>
+      <ion-col col-4 >
+        <button ion-button outline [color]="(selectedEmissionAmount === '4.0L以上') ? 'secondary' : 'black'" (click)="onSelectEmissionAmount('4.0L以上')">4.0L以上</button>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item>
+    排放标准
+    <ion-grid text-center>
+      <ion-row *ngIf="carTypeData">
+        <ion-col col-4 *ngFor="let emission of carTypeData.emission">
+          <button ion-button outline [color]="(selectedEmissionLevel === emission.emissionLevel) ? 'secondary' : 'black'" (click)="onSelectEmissionLevel(emission.emissionLevel)">
+            {{emission.emissionLevel}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>  
+  </ion-item>
+  <ion-item>
+    颜色
+    <ion-grid text-center>
+      <ion-row *ngIf="carTypeData">
+        <ion-col col-4 *ngFor="let color of carTypeData.color">
+          <button ion-button outline [color]="(selectedColor === color.colorName) ? 'secondary' : 'black'" (click)="onSelectColor(color.colorName)">
+            {{color.colorName}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>  
+  </ion-item>
+  <ion-item>
+    变速箱
+    <ion-grid text-center>
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button outline [color]="(selectedGear === '自动') ? 'secondary' : 'black'" (click)="onSelectGear('自动')">
+            自动
+          </button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button outline [color]="(selectedGear === '手动') ? 'secondary' : 'black'" (click)="onSelectGear('手动')">
+            手动
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>      
+  </ion-item>
+  <ion-item>
+    座位数
+    <ion-grid text-center>
+      <ion-row *ngIf="carTypeData">
+        <ion-col col-4 *ngFor="let cap of carTypeData.capability">
+          <button ion-button outline [color]="(selectedCapability === cap.capability) ? 'secondary' : 'black'" (click)="onSelectCapability(cap.capability)">
+            {{cap.capability}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item>
+    燃油类型
+    <ion-grid text-center>
+      <ion-row *ngIf="carTypeData">
+        <ion-col col-4 *ngFor="let oil of carTypeData.fuelOil">
+          <button ion-button outline [color]="(selectedOil === oil.oilName) ? 'secondary' : 'black'" (click)="onSelectOil(oil.oilName)">
+            {{oil.oilName}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item>
+    国别
+    <ion-grid text-center>
+      <ion-row *ngIf="carTypeData">
+        <ion-col col-4 *ngFor="let country of carTypeData.productCountry">
+          <button ion-button outline [color]="(selectedCountry === country.countryName) ? 'secondary' : 'black'" (click)="onSelectCountry(country.countryName)">
+            {{country.countryName}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-item>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar no-padding no-margin color="primery" position="bottom" style="border-top: 1px solid #eeeeee; padding: 0px;">
+    <ion-row no-boder no-padding align-items-center style="text-align: center;">
+      <ion-col col-3 style="font-size: 1.2rem; border-right: 1px solid #eeeeee; height: 100%;" (click)="onSaveFilter()">订阅</ion-col>
+      <ion-col col-9 style="font-size: 1.2rem; border-right: 1px solid #eeeeee; background-color: #007fd8; color: white;" (click)="onViewResult()">找到车辆</ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

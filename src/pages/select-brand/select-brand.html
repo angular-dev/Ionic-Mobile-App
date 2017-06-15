@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title align-title="center">选择品牌</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="select-brand">
+    <ion-item-group *ngIf="allowNoSelectionFlag">
+      <div>
+        <ion-item-divider color="light" (click)="closeNav()">
+          #
+        </ion-item-divider>
+        <ion-item (click)="itemSelected('不限品牌')">
+          不限品牌
+        </ion-item>
+      </div>
+    </ion-item-group>
+    <ion-item-group>
+      <div *ngFor="let item of mainCars">
+        <ion-item-divider color="light" *ngIf="item._id == '0'" id="first_letter_{{item.chName}}" (click)="closeNav()">
+          {{item.chName}}
+        </ion-item-divider>
+        <ion-item *ngIf="item._id != '0'" (click)="itemSelected(item)">
+          <ion-thumbnail item-left>
+            <img src="{{item.logo}}">
+            <!--<img src="assets/images/car-thumb.png" /> -->
+          </ion-thumbnail>
+          {{item.chName}}
+        </ion-item>
+      </div>
+    </ion-item-group>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+      <ion-item  *ngIf="currentCar">
+        <ion-thumbnail item-left>
+          <img src="{{currentCar.logo}}">
+        </ion-thumbnail>
+        {{currentCar.chName}}
+      </ion-item>
+      <div class="select-series">
+        选择车系
+      </div>
+      <ion-list class="series">
+        <ion-item (click)="selectSeries('不限')" *ngIf="allowNoSelectionFlag">
+          不限车系
+        </ion-item>
+        <ion-item *ngFor="let item of currentSeries" (click)="selectSeries(item)">
+          <ion-thumbnail item-left>
+            <img src="{{item.seriesLogo}}">
+          </ion-thumbnail>
+          {{item.chName}}
+        </ion-item>
+      </ion-list>
+    </div>
+    <ul class="abc js-abc-nav">
+      <li *ngFor="let item of alphaList" (click)="clickAlpha(item)">
+        <a href="#first_letter_{{item}}">{{item}}</a>
+      </li>
+    </ul>
+</ion-content>

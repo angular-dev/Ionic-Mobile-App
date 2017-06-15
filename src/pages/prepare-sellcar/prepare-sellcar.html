@@ -1,0 +1,78 @@
+<ion-header no-border #header>
+
+  <ion-navbar id = "navbar" #navbar text-center>
+    <ion-title>
+	  预约卖车信息
+    </ion-title>
+
+
+  </ion-navbar>
+
+</ion-header>
+<ion-content no-padding scrollbar-y-auto class="has-header prepare-sellcar">
+  <div class="progress">
+    <div>
+      <div class="left-knob knob"></div>
+      <div class="left-bar bar"></div>
+      <div class="right-bar bar"></div>
+      <div class="right-knob knob"></div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col">
+        填写手机号
+      </div>
+      <div class="col">
+
+      </div>
+      <div class="col">
+          提交预约信息<br/>助你更快卖车
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+
+  <div class="car-info">
+    <ion-list inset no-padding style="margin-top: 0px;">
+      <ion-item no-padding>
+        <span style="margin-left:15px; font-size: 1.4rem;">品牌车系</span>
+        <span *ngIf="carInfo.seriesName === ''" class="car-brand" style="margin-left:15px; font-size: 1.4rem;color:grey;" (click)="openSelectBrand($event)">请选择品牌车系</span>
+        <span *ngIf="carInfo.seriesName !== ''" class="car-brand" style="margin-left:15px; font-size: 1.4rem;color:black;" (click)="openSelectBrand($event)">{{carInfo.seriesName}}</span>
+        <ion-icon item-right name="arrow-forward" color="lightGrey"></ion-icon>
+      </ion-item>
+      <!--<ion-item no-padding>
+        <span style="margin-left:15px; font-size: 1.4rem;">上牌时间</span>
+        <span class="car-brand" style="margin-left:15px; font-size: 1.4rem;">请选择上牌时间</span>
+        <ion-icon item-right name="arrow-forward" color="lightGrey"></ion-icon>
+      </ion-item>-->
+      <ion-item>
+        <ion-label style="color: black;">上牌时间</ion-label>
+        <span>请选择上牌时间</span>
+        <ion-datetime displayFormat="YYYY年MM月" [(ngModel)]="carDate" (ngModelChange)="updateCarDate($event)">
+        </ion-datetime>
+        <ion-icon item-right name="arrow-forward" color="lightGrey"></ion-icon>
+      </ion-item>
+      <ion-item no-padding>
+        <span style="margin-left:15px; font-size: 1.4rem;">行使里程</span>
+        <input [(ngModel)]="distance" type="tel" placeholder="请填写里程数" class="distance" (ngModelChange)="updateDistance($event)" />
+        <span class="car-distance" style="margin-left:15px; font-size: 1.4rem;">万公里</span>
+      </ion-item>
+      <ion-item no-padding>
+        <span style="margin-left:15px; font-size: 1.4rem;">验车地址</span>
+        <!--<span class="car-brand" style="margin-left:15px; font-size: 1.4rem;">{{currentLocation}}</span>-->
+        <input [(ngModel)]="currentLocation" type="text" placeholder="你的位置" class="current-pos" (ngModelChange)="updateLocation($event)"/>
+        <!--<ion-icon item-right name="arrow-forward" color="lightGrey"></ion-icon>-->
+      </ion-item>
+    </ion-list>
+  </div>
+  <!--<div id="allmap" style="width: 100%;height: 300px;overflow: hidden;margin:0">
+  </div>-->
+</ion-content>
+
+<ion-footer class="prepare-sellcar-footer">
+  <ion-toolbar [ngClass]="{'available' : (carInfo.seriesName && carDate && distance && currentLocation)}" (click)="goAfterPlanPage()" >
+    <ion-title>我要提交</ion-title>
+  </ion-toolbar>
+</ion-footer>

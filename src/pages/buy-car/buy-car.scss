@@ -1,0 +1,108 @@
+.prepareToast {
+  .toast-wrapper {
+    width: 50%;
+    border-radius: 5px;
+  }
+  .toast-message {
+    text-align: center;
+    width: 50%;
+    height: 40px;
+    line-height: 8px;
+    opacity: 0.9;
+  }
+}
+
+.ios, .md {
+  page-buy-car {
+    .secondary {
+      color: ff0000 !important;
+      border: 1px solid ff0000 !important;
+    }
+    .black {
+      color: ffffff;
+      border: 1px solid ffffff;
+    }
+	  .bar-buttons {
+      background-color: white; 
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+
+      -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 
+      					  0 3px 1px -2px rgba(0, 0, 0, 0.2), 
+      					  0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 	  0 2px 2px 0 rgba(0, 0, 0, 0.14), 
+      				   	  0 3px 1px -2px rgba(0, 0, 0, 0.2), 
+      				      0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: 		  0 2px 2px 0 rgba(0, 0, 0, 0.14), 
+      					  0 3px 1px -2px rgba(0, 0, 0, 0.2), 
+      					  0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+    .price-overlay .item-inner {
+      border: none !important;
+    }
+
+    .header-searchbar {
+      font-size: 22px;
+    }
+
+    [ion-fixed] {
+      background-color: white;
+      width: 100%;
+      display: block;
+    }
+
+    // .item-md, .item-range, .item-block {
+    //   border: none !important;
+    // }
+
+    .sort-overlay, .price-overlay {
+      position: fixed;
+      width: 100%;
+      height: 2000px;
+      background: rgba(0,0,0,0.7);
+      z-index: 20;
+      top: 36px;
+      left: 0;
+      border-top: 1px solid lightgray;
+    }
+    .price-overlay-content {
+      background-color: white;
+    }
+
+    .price-overlay-content button {
+      height: 30px;
+    }
+
+    .price-overlay-content button {
+      width: 100%;
+    }
+
+  }
+}
+
+.ios {
+  page-buy-car {
+    .sort-overlay, .price-overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 20;
+      top: 107px;
+      left: 0;
+    }
+  }  
+}
+
+.md {
+  page-buy-car {
+    .searchbar-md .searchbar-search-icon {
+      top: 6px;
+      left: 5px;
+    }
+
+    .searchbar-md .searchbar-input {
+      padding: 6px 26px;
+    }
+  }
+}

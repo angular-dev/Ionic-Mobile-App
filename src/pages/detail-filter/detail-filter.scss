@@ -1,0 +1,88 @@
+.ios {
+    .detail-filter-header {
+      height: 70px;
+      background: #eeeeee;
+      .back-button {
+        top: 27px;
+      }
+    }
+    .detail-filter-header:after {
+        display: none;
+    }    
+    .back-button {
+      color: black;
+    }
+}
+.md {
+    .detail-filter-header {
+      height: 56px;
+      background: #eeeeee;
+      .back-button {
+        top: 12px;
+      }
+    }
+    .detail-filter-header:after {
+        display: none;
+    }    
+    .back-button {
+      color: black;
+    }
+}
+.ios, .md {
+  page-detail-filter {
+    .toolbar-title {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+    }
+
+    .ion-alpha-scroll .scroll-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    ion-content button {
+      width: 100%;
+      height: 25px;
+      font-size: .8em;
+    }
+
+    ion-row .item-inner {
+      border: none !important;
+    }
+
+    .selectedBrand {
+      position: absolute;
+      right: 35px;
+    }
+    
+  }
+}
+
+.ios {
+  ion-toolbar {
+    line-height: $navbar-ios-height;
+  }
+
+}
+
+.md {
+  ion-toolbar {
+    line-height: $navbar-md-height;
+  }	
+
+  .title.title-md {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 70%;
+    text-align: center;
+  }
+
+}

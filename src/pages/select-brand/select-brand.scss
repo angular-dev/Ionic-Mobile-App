@@ -1,0 +1,115 @@
+.alphaToast {
+  .toast-wrapper {
+    width: 50px;
+    border-radius: 0px;
+  }
+  .toast-message {
+    text-align: center;
+    width: 50%;
+    height: 40px;
+    line-height: 6px;
+    opacity: 0.8;
+  }
+}
+.select-brand {
+  background: #eeeeee;
+  .row {
+    text-align: center;
+  }
+  .item-divider {
+    z-index: 1 ;
+    height: 30px !important;
+  }
+  .history {
+    padding: 15px 20px 9px 9px;
+  }
+  .item-md {
+    height: 50px;
+  }
+  .item  {
+    img {
+      width: 30px !important;
+    }
+  }
+  .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left] {
+    margin: 8px 16px 8px 0;
+    max-height: 30px;
+    min-width: 42px;
+    min-width: 50px;
+    min-height: 30px;
+  }
+  #mySidenav {
+    .series {
+      img {
+        width: 50px !important;
+      }
+    }
+    .item-md.item-block .item-inner {
+      border: none;
+    }
+    .item-md.item-block {
+      border-bottom: solid 1px #f4f4f4;
+    }
+    .select-series {
+      height: 26px;
+      background: #f4f4f4;
+      padding-left: 20px;
+      line-height: 26px;
+    }
+  }
+  .abc {
+    position: fixed;
+    top: 65px;
+    right: 20px;
+    background: transparent;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+
+    a {
+      text-decoration: none;
+      color: green;
+    }
+
+    li {
+      padding: 2px 7px;
+      margin: -1px 0;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+  .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 55px;
+      right: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 40px;
+  }
+
+  .sidenav a {
+      padding: 0px 5px 0px 20px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+  }
+
+  .sidenav a:hover, .offcanvas a:focus{
+      color: #f1f1f1;
+  }
+
+  .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
+}

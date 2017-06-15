@@ -1,0 +1,175 @@
+<ion-header no-border>
+  <ion-navbar>
+
+    <ion-buttons left class="bar-buttons">
+      <button ion-button icon-left color="secondary" (click)="openSelectCityPage()">
+         <ion-icon name="pin"></ion-icon>
+         {{mainCity | async}}
+      </button>
+    </ion-buttons>
+
+
+	<ion-searchbar #searchabar id="searchabar" [(ngModel)]="queryString" color="secondary" placeholder="请输入品牌或者车型车系" class="header-searchbar" (keyup.enter)="search(searchabar.value)"></ion-searchbar>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content scrollbar-y-auto>
+  <!-- top image slide -->
+  <div>
+    <ion-slides id="promoSlider" #promoSlider loop="true" autoplay="2000" autoplayDisableOnInteraction="false" spaceBetween=0 (ionSlideDidChange)="onPromoSlideChanged()">
+      <ion-slide style="margin:0;">
+        <img src="{{slideImgUrl1}}" />
+      </ion-slide>
+      <ion-slide style="margin:0;">
+        <img src="{{slideImgUrl2}}" />
+      </ion-slide>
+      <ion-slide style="margin:0;">
+        <img src="{{slideImgUrl3}}" />
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- main content -->
+  <div class="home-main-content">
+    <!-- top three buttons -->
+    <div class="two-texts-button" (click)="openBuyCarPage()">
+      <img ion-img class="two-texts-button-icon" src="assets/images/icons/icon-basket.png"/>
+      <span class="two-texts-button-first-label">我要买车</span>
+      <span class="two-texts-button-second-label">选择品牌／价格 ></span>
+    </div>
+
+    <ion-row>
+      <ion-col col-8 style="padding-left:0px;">
+	    <div class="two-texts-button" (click)="openSellCarPage()">
+	      <img ion-img class="two-texts-button-icon" src="assets/images/icons/icon-yuan.png"/>
+	      <span class="two-texts-button-first-label">我要卖车</span>
+	      <span class="two-texts-button-second-label">2天成交 ></span>
+	    </div>
+      </ion-col>
+      <ion-col col-4 style="padding-left:0px; padding-right: 0px;">
+	    <div class="two-texts-button" style="text-align: center" (click)="callYouchiService()">
+	      <span class="one-text-button-label">车辆估价</span>
+	    </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- one key search button group -->
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('5万以下')">5万以下</button>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <div class="vertical-black-divider"></div>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('5-10万')">5-10万</button>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('10万以上')">10万以上</button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('全部价位')">全部价位></button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('桥车')">桥车</button>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('SUV')">SUV</button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('货车')">货车</button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('全部车型')">全部车型></button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('大众')">大众</button>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('宝马')">宝马</button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('奔驰')">奔驰</button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+        <ion-col col-3 text-center>
+          <button ion-button clear small col-sm color="black" (click)="openBuyCarPage('全部品牌')">全部品牌></button>
+          <div class="vertical-black-divider"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- suggestin car type button group -->
+    <ion-grid no-padding style="border-bottom: 1px solid #cccccc !important">
+      <ion-row align-items-center>
+      	<ion-col col-6>
+      	  <h3>推荐车型</h3>
+      	</ion-col>
+      	<ion-col col-6  text-right>
+      	  <button ion-button clear small col-sm color="secondary" (click)="openBuyCarPage()">更多车型></button>
+      	</ion-col>
+      </ion-row>
+      <ion-row *ngIf="suggestionList">
+      	<ion-col col-7 class="gray-ion-col large-car-col" (click)="openBuyCarPage(sugCarName1)">
+      	  <h6 class="car-brand">{{sugCarName1}}</h6>
+      	  <h6 class="car-price">{{sugCarPrice1 + '万起'}}</h6>
+ 	  	  <img ion-img class="large-car-img" src="{{sugCarImgUrl1}}"/>
+      	</ion-col>
+      	<ion-col col-5>
+      	  <ion-grid no-padding>
+      	  	<ion-row style="padding-left: 2vw; padding-bottom: 2vw" (click)="openBuyCarPage(sugCarName2)">
+      	  	  <ion-col class="gray-ion-col small-car-col">
+		      	<h6 class="car-brand">{{sugCarName2}}</h6>
+		      	<h6 class="car-price">{{sugCarPrice2 + '万起'}}</h6>
+	   	  	    <img ion-img class="small-car-img" src="{{sugCarImgUrl2}}"/>
+      	  	  </ion-col>
+      	  	</ion-row>
+      	  	<ion-row style="padding-left: 2vw;" (click)="openBuyCarPage(sugCarName3)">
+      	  	  <ion-col class="gray-ion-col small-car-col">
+		      	<h6 class="car-brand">{{sugCarName3}}</h6>
+		      	<h6 class="car-price">{{sugCarPrice3 + '万起'}}</h6>
+	   	  	    <img ion-img class="small-car-img" src="{{sugCarImgUrl3}}"/>
+      	  	  </ion-col>
+      	  	</ion-row>
+      	  </ion-grid>
+      	</ion-col>
+      </ion-row>
+      <ion-row align-items-center style="border-bottom: 1px solid #cccccc !important">
+      	<ion-col col-6>
+      	  <h3>最新车型</h3>
+      	</ion-col>
+      	<ion-col col-6  text-right>
+      	  <button ion-button clear small col-sm color="secondary" (click)="openBuyCarPage()">更多车型></button>
+      	</ion-col>
+      </ion-row>
+    </ion-grid>
+
+	<ion-list no-lines>
+
+	  <ion-item *ngFor="let carInfo of carList" text-wrap class="car-list-item" (click)="openCarDetailsPage($event, carInfo)">
+	    <ion-thumbnail item-left>
+	      <img src="{{carInfo.carImages[0].imagePath}}">
+	    </ion-thumbnail>
+	    <h2>{{carInfo.series.chName + ' ' + carInfo.emissionAmount + 'L'}}</h2>
+	    <p><span class="car-price-main-span">{{carInfo.price + '万'}}</span><span class="car-price-span">{{'新车指导价（含税）'+ carInfo.price + '万'}}</span></p>
+	    <p class="car-desc-span">{{carInfo.city.chName}}／{{carInfo.purchaseDate.year + '-' + carInfo.purchaseDate.month}}/{{carInfo.totalDriven + '万公里'}}／{{carInfo.gearshift}}</p>
+	  </ion-item>
+
+	</ion-list>
+
+  </div>
+
+
+</ion-content>

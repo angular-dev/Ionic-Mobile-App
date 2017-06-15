@@ -1,0 +1,47 @@
+.ios, .md {
+  page-select-city {
+  	.back-button {
+  	  color: black;
+  	}
+
+    .toolbar-title {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+    }
+
+    .ion-alpha-scroll .scroll-content::-webkit-scrollbar {
+      display: none;
+    }
+
+  }
+}
+
+.ios {
+  ion-toolbar {
+    line-height: $navbar-ios-height;
+  }
+
+}
+
+.md {
+  ion-toolbar {
+    line-height: $navbar-md-height;
+  }	
+
+  .title.title-md {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 70%;
+    text-align: center;
+  }
+
+}

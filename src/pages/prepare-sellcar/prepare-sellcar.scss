@@ -1,0 +1,118 @@
+  .prepare-sellcar-header {
+    height: 56px;
+    background: #eeeeee;
+    .back-button {
+      top: 12px;
+    }
+  }
+  .prepare-sellcar-header:after {
+      display: none;
+  }
+.ios {
+    .prepare-sellcar-header {
+      height: 70px;
+      background: #eeeeee;
+      .back-button {
+        top: 27px;
+      }
+    }
+    .prepare-sellcar-header:after {
+        display: none;
+    }
+}
+.prepare-sellcar {
+  background: #eeeeee;
+  .row {
+    text-align: center;
+  }
+  .grey {
+    color: grey;
+  }
+  .progress {
+    height: 85px;
+    background: white;
+  }
+  .distance {
+    width: 95px;
+    position: absolute;
+    right: 70px;
+    border: none;
+    text-align: right;
+    top: 10px;
+  }
+  .car-distance {
+    position: absolute;
+    right: 20px;
+  }
+  .current-pos{
+    width: 160px;
+    position: absolute;
+    right: 15px;
+    border: none;
+    text-align: right;
+    top: 10px;
+  }
+  .knob {
+    position: absolute;
+    top: 13px;
+    z-index: 2;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #129e12;
+    -webkit-transform: scale(0.67);
+    transform: scale(0.67);
+    transition-duration: 120ms;
+    transition-property: background-color, border, -webkit-transform;
+    transition-property: transform, background-color, border;
+    transition-property: transform, background-color, border, -webkit-transform;
+    transition-timing-function: ease;
+    pointer-events: none;
+  }
+  .bar {
+    position: absolute;
+    top: 21px;
+    width: 34%;
+    height: 2px;
+    background: #129e12;
+    pointer-events: none;
+  }
+  .left-knob {
+      left: 16.67%;
+  }
+  .left-bar {
+      left: calc(16.67% + 9px);
+  }
+  .center-knob {
+      left: 50%;
+  }
+  .right-bar {
+      left: calc(50% + 9px);
+      width: 33%;
+  }
+  .right-knob {
+      left: 83.33%;
+  }
+
+  .car-info {
+    .car-brand {
+      position: absolute;
+      right: 35px;
+    }
+  }
+
+}
+
+.prepare-sellcar-footer {
+  .toolbar-title {
+      color: white !important;
+  }
+  .toolbar-background {
+    background: #b2b2b2;
+  }
+  .available {
+    .toolbar-background {
+      background: #129e12 !important;
+    }
+  }
+}

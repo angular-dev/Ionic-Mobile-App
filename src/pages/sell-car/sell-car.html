@@ -1,0 +1,85 @@
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+    <ion-title align-title="center">我要卖车</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding scrollbar-y-auto>
+  <div>
+    <img src="assets/images/sellcar-bg.png" width="100%"/>
+  </div>
+
+  <div style="margin: 10px; padding: 0px;">
+	<ion-grid padding="5px" style="padding: 0px !important">
+	  <ion-row>
+	    <ion-col>
+	     	<ion-input [(ngModel)]="phone" type="text" placeholder="请输入手机号" style="border: 2px solid #007fd8; border-radius: 5px;"></ion-input>
+	  	</ion-col>
+	  </ion-row>
+	  <ion-row>
+	    <ion-col>
+	  	  <button ion-button block color="secondary" (click)="goPrepareSellCar($event, carInfo)">预约卖车</button>
+	  	</ion-col>
+	  </ion-row>
+	  <ion-row>
+	    <ion-col>
+	  	  <button ion-button block color="secondary" (click)="callService()">免费咨询</button>
+	  	</ion-col>
+	  	<ion-col>
+		  <button ion-button block color="secondary" (click)="callService()">爱车估价</button>
+	  	</ion-col>
+	  </ion-row>
+	  <ion-row>
+	    <ion-col>
+	  	  <button ion-button block color="secondary">查看卖车进度</button>
+	  	</ion-col>
+	  </ion-row>
+	</ion-grid>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+
+  <div style="margin: 15px" >
+  	<h6>卖车流程</h6>
+  	<ion-row>
+  	  <ion-col col-3 text-center>
+  	  	<img ion-img style="padding:5px !important;" src="assets/images/icons/icon-sellcar-request.png" width="100%" />
+  	  	<span style="font-size: 1.0rem; color:grey">提交信息</span>
+  	  </ion-col>
+  	  <ion-col col-3 text-center>
+  	  	<img ion-img style="padding:5px !important;" src="assets/images/icons/icon-sellcar-visit.png" width="100%" />
+  	  	<span style="font-size: 1.0rem; color:grey">上门服务</span>
+  	  </ion-col>
+  	  <ion-col col-3 text-center>
+  	  	<img ion-img style="padding:5px !important;" src="assets/images/icons/icon-sellcar-review.png" width="100%" />
+  	  	<span style="font-size: 1.0rem; color:grey">买家看车</span>
+  	  </ion-col>
+  	  <ion-col col-3 text-center>
+  	  	<img ion-img style="padding:5px !important;" src="assets/images/icons/icon-sellcar-right.png" width="100%" />
+  	  	<span style="font-size: 1.0rem; color:grey">交易过户</span>
+  	  </ion-col>
+  	</ion-row>
+  </div>
+
+  <div style="height: 10px; background-color: #eeeeee;"></div>
+
+  <div>
+	<ion-list-header style="color:black; font-size: 1.6rem; font-weight: bold; border-bottom: 1px solid #cccccc; margin-bottom: 1px;">
+  	  常见问题
+    </ion-list-header>
+    <ion-list inset no-padding style="margin-top: 0px;">
+      <ion-item *ngFor="let item of faqList" (click)="itemSelected(item)" no-padding>
+        <ion-icon *ngIf="item.show != true" item-right name="arrow-down" color="lightGrey"></ion-icon>
+        <ion-icon *ngIf="item.show == true" item-right name="arrow-up" color="lightGrey"></ion-icon>
+        <span style="margin-left:15px; font-size: 1.4rem;">{{ item.chQuestion }}</span>
+        <div class="answer" *ngIf="item.show == true">
+          {{item.chAnswer}}
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

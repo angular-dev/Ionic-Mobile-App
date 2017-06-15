@@ -1,0 +1,30 @@
+<ion-header no-border #header>
+
+  <ion-navbar id = "navbar" #navbar text-center>
+    <ion-title>
+	  城市列表
+    </ion-title>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding scrollbar-y-auto>
+    <ion-item-group>
+ 
+      <ion-item-divider light>当前定位城市</ion-item-divider>
+      <ion-item (click)="selectedCity($event, currentPosition)">{{currentPosition}}</ion-item>
+      <ion-item (click)="selectedCity($event, '全国')">全国</ion-item>
+ 
+    </ion-item-group>
+    <ion-item-group *ngFor="let group of groupedCities">
+ 
+      <ion-item-divider light>{{group.letter}}</ion-item-divider>
+      <ion-item *ngFor="let city of group.cities" (click)="selectedCity($event, city.chName)">{{city.chName}}</ion-item>
+ 
+    </ion-item-group>
+ 
+</ion-content>
+

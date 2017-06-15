@@ -1,0 +1,87 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.ios, .md {
+  [scrollbar-y-auto] .scroll-content {
+    overflow-y: auto !important;
+  }
+
+  .vertical-black-divider{
+    position: absolute;
+    top: 25%;
+    bottom: 25%;
+    border-left: 1px solid black;
+  }
+  .vertical-grey-divider{
+    position: absolute;
+    top: 25%;
+    bottom: 25%;
+    border-left: 1px solid #cccccc;
+  }
+  .car-list-item h2 {
+    font-size: 12px;
+  }
+
+  .car-price-main-span {
+    color: #ee5c4e; 
+    font-size: 11px;
+  }
+
+  .car-price-span {
+    font-size: 8px;
+  }
+
+  .car-desc-span {
+    font-size: 11px;
+  }
+  
+  .car-list-item {
+    border-bottom: 1px solid #cccccc !important;
+  }
+
+  .first-car-list-item {
+    border-top: 1px solid #cccccc !important;
+  }
+
+  .item-ios ion-thumbnail img {
+    width: 100px;
+    height: auto;
+    margin:0 auto !important;
+    max-height: 100px !important;
+    max-width: 100px !important;
+    algin-items: center;
+  }
+
+  .item-md ion-thumbnail img {
+    width: 100px;
+    height: auto;
+    margin:0 auto !important;
+    max-height: 100px !important;
+    max-width: 100px !important;
+    algin-items: center;
+  }
+
+  .center-image {
+     width: auto; 
+     position: absolute; 
+     left: 0; 
+     right: 0; 
+     margin: 0 auto; 
+     top: 50%; 
+     transform: translateY(-50%);
+  }
+
+}

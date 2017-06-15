@@ -1,0 +1,159 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left class="bar-buttons">
+      <button ion-button icon-left color="secondary" (click)="openSelectCityPage()">
+         <ion-icon name="pin"></ion-icon>
+         {{mainCity | async}}
+      </button>
+    </ion-buttons>
+
+	<ion-searchbar #searchbar id="searchbar" color="secondary" placeholder="请输入品牌或者车型车系" class="header-searchbar" (ionClear)="clarSearch($event)" (ionCancel)="clearSearch($event)" (keyup.enter)="search(searchbar.value)"></ion-searchbar>
+
+  </ion-navbar>
+
+</ion-header>
+<ion-content no-padding scrollbar-y-auto scroll="true">
+
+  <div ion-fixed>
+		<ion-grid no-padding>
+			<ion-row style="border-bottom: 1px solid #cccccc;">
+			<ion-col col-3 text-center>
+					<button ion-button clear small col-sm color="black" id="btnUnifSort" (click)="hideUnifSortOverlay()">
+				{{selectedSortMode}} &nbsp; 
+				<ion-icon right name="arrow-down" color="secondary"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-3 text-center>
+				<div class="vertical-grey-divider"></div>
+				<button ion-button clear small col-sm color="black" (click)="openBrandSelectionPage()">
+					{{brandBtnText}} &nbsp; 
+					<ion-icon right name="arrow-down" color="secondary"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-3 text-center>
+				<button ion-button clear small col-sm color="black" (click)="hidePriceSortOverlay()">
+				{{priceScopeBtnText}} &nbsp; 
+				<ion-icon right name="arrow-down" color="secondary"></ion-icon>
+				</button>
+				<div class="vertical-grey-divider"></div>
+			</ion-col>
+			<ion-col col-3 text-center>
+				<button ion-button clear small col-sm color="black" (click)="openDetailFilterPage($event)">
+				筛选 &nbsp;
+					<ion-badge item-right *ngIf="selectedFilterKeyNum !== 0" color="red">{{selectedFilterKeyNum}}</ion-badge> 
+				<ion-icon right name="arrow-down" color="secondary"></ion-icon>
+				</button>
+				<div class="vertical-grey-divider"></div>
+			</ion-col>
+			</ion-row>
+		</ion-grid>
+
+
+		<div class="sort-overlay" no-padding [hidden]="!sortOverlayHidden">
+			<div class="sort-overlay-content">
+				<ion-list>
+					<button ion-item detail-none [style.color]="(selectedSortMode === '智能排序' || selectedSortMode === '排序') ? '#007fd8' : 'black'" (click)="onIntelligentSort()">智能排序<ion-icon *ngIf="selectedSortMode === '智能排序' || selectedSortMode === '排序'" name="checkmark" item-right></ion-icon></button>  
+					<button ion-item detail-none [style.color]="selectedSortMode === '最新上架' ? '#007fd8' : 'black'" (click)="onRecentSort()">最新上架<ion-icon *ngIf="selectedSortMode === '最新上架'" name="checkmark" item-right></ion-icon></button>  
+					<button ion-item detail-none [style.color]="selectedSortMode === '价格最低' ? '#007fd8' : 'black'" (click)="onCheapestSort()">价格最低<ion-icon *ngIf="selectedSortMode === '价格最低'" name="checkmark" item-right></ion-icon></button>  
+					<button ion-item detail-none [style.color]="selectedSortMode === '价格最高' ? '#007fd8' : 'black'" (click)="onExpensiveSort()">价格最高<ion-icon *ngIf="selectedSortMode === '价格最高'" name="checkmark" item-right></ion-icon></button>  
+					<button ion-item detail-none [style.color]="selectedSortMode === '车龄最短' ? '#007fd8' : 'black'" (click)="onMinYearSort()">车龄最短<ion-icon *ngIf="selectedSortMode === '车龄最短'" name="checkmark" item-right></ion-icon></button>  
+					<button ion-item detail-none [style.color]="selectedSortMode === '里程最小' ? '#007fd8' : 'black'" (click)="onMinDrivenSort()">里程最小<ion-icon *ngIf="selectedSortMode === '里程最小'" name="checkmark" item-right></ion-icon></button>  
+				</ion-list>
+			</div>
+		</div>
+
+		<div class="price-overlay" no-padding [hidden]="!priceOverlayHidden">
+			<div class="price-overlay-content">
+				<ion-grid>
+					<ion-row>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '不限' ? 'secondary' : 'black'" (click)="onPriceButton('不限')">不限</button>
+						</ion-col>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '3万以下' ? 'secondary' : 'black'" (click)="onPriceButton('3万以下')">3万以下</button>
+						</ion-col>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '3-5万' ? 'secondary' : 'black'" (click)="onPriceButton('3-5万')">3-5万</button>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '5-7万' ? 'secondary' : 'black'" (click)="onPriceButton('5-7万')">5-7万</button>
+						</ion-col>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '7-9万' ? 'secondary' : 'black'" (click)="onPriceButton('7-9万')">7-9万</button>
+						</ion-col>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '9-12万' ? 'secondary' : 'black'" (click)="onPriceButton('9-12万')">9-12万</button>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '12-16万' ? 'secondary' : 'black'" (click)="onPriceButton('12-16万')">12-16万</button>
+						</ion-col>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '16-20万' ? 'secondary' : 'black'" (click)="onPriceButton('16-20万')">16-20万</button>
+						</ion-col>
+						<ion-col col-4 text-center>
+							<button ion-button outline [color]="selectedPriceScope === '20万以上' ? 'secondary' : 'black'" (click)="onPriceButton('20万以上')">20万以上</button>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-8 text-left>自定义价格(单位:万)</ion-col>
+						<ion-col col-4 text-right>{{priceScopeDescription}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-item style="border: none">
+							<ion-range dualKnobs="true" pin="true" [(ngModel)]="priceScopeStruction" min=0 max=50 color="secondary" (ionChange)="updateScopeDesc($event)"></ion-range>
+						</ion-item>
+					</ion-row>
+					<ion-row>
+						<ion-col col-2 text-center><span>0</span></ion-col>
+						<ion-col col-2 text-center><span>10</span></ion-col>
+						<ion-col col-2 text-center><span>20</span></ion-col>
+						<ion-col col-2 text-center><span>30</span></ion-col>
+						<ion-col col-2 text-center><span>40</span></ion-col>
+						<ion-col col-2 text-center><span>不限</span></ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-12 text-center>
+							<button ion-button style="width: 50%" color="secondary" text-center (click)="onPriceConfirmBtn()">确认</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+
+			</div>
+		</div>		
+  </div>
+
+
+
+
+  <div style="padding-top: 35px; border: none;">
+		<ion-refresher (ionRefresh)="refreshCarList($event)" style="margin-top: 35px;">
+			<ion-refresher-content>
+			<pullingIcon="arrow-down"
+						pullingText="Pull to refresh"
+						refreshingSpinner="circles"
+						refreshingText="正在下载。。。">
+			</ion-refresher-content>
+		</ion-refresher>
+		<ion-list no-lines>
+
+			<ion-item *ngFor="let carInfo of carInfos" text-wrap class="car-list-item" (click)="openCarDetailsPage($event, carInfo)">
+			<ion-thumbnail item-left>
+					<img src="{{carInfo.carImages[0].imagePath}}">
+			</ion-thumbnail>
+			<h2>{{carInfo.series.chName + ' ' + carInfo.emissionAmount + 'L'}}</h2>
+			<p><span class="car-price-main-span">{{carInfo.price + '万'}}</span><span class="car-price-span">{{'新车指导价（含税）'+ carInfo.price + '万'}}</span></p>
+			<p class="car-desc-span">{{carInfo.city.chName}}／{{carInfo.purchaseDate.year + '-' + carInfo.purchaseDate.month}}/{{carInfo.totalDriven + '万公里'}}／{{carInfo.gearshift}}</p>
+			</ion-item>
+
+		</ion-list>
+		<ion-infinite-scroll *ngIf=(infiniteEnabled) (ionInfinite)="doInfiniteCar($event)">
+      <ion-infinite-scroll-content>
+      </ion-infinite-scroll-content>
+  	</ion-infinite-scroll>
+  </div>
+</ion-content>

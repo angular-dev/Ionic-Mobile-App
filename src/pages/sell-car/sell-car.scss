@@ -1,0 +1,63 @@
+.prepareToast {
+  .toast-wrapper {
+    width: 50%;
+    border-radius: 5px;
+  }
+  .toast-message {
+    text-align: center;
+    width: 50%;
+    height: 40px;
+    line-height: 8px;
+    opacity: 0.9;
+  }
+}
+.ios, .md {
+  page-sell-car {
+		.button-md {
+			box-shadow: none;
+		}
+
+		.input-cover {
+			position: static;
+		}
+		
+		.toolbar-title {
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			-webkit-align-items: center;
+			align-items: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+
+		.toolbar-background {
+			border: none;
+			-webkit-box-shadow: 0,
+										0,
+										0 !important;
+			-moz-box-shadow: 	0,
+											0,
+											0 !important;
+			border-shadow: 0px 0px 0px #000000 !important;
+		}
+
+			.header-md::after {
+				background-image: none;
+			}
+
+		.col {
+		}
+
+    input.text-input {
+      margin-left: 10px;
+    }
+
+    .answer {
+    	padding-left: 15px;
+    	padding-top: 10px;
+    	white-space: normal;
+    }
+  }
+}

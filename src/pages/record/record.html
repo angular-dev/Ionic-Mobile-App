@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>预约记录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content scrollbar-y-auto>
+	<ion-list no-lines>
+	  <ion-item *ngFor="let carInfo of carList" text-wrap class="car-list-item">
+	    <ion-thumbnail item-left>
+	      <img src="{{carInfo.carImages[0].imagePath}}">
+	    </ion-thumbnail>
+	    <h2>{{carInfo.brand.chName}}</h2>
+	    <p><span class="car-price-main-span">{{carInfo.price + '万'}}</span><span class="car-price-span">{{'新车指导价（含税）'+ carInfo.price + '万'}}</span></p>
+	    <p class="car-desc-span">{{carInfo.city.chName}}／{{carInfo.purchaseDate.year + '-' + carInfo.purchaseDate.month}}/{{carInfo.totalDriven + '万公里'}}／{{carInfo.gearshift}}</p>
+	  </ion-item>
+
+	</ion-list>
+</ion-content>
